@@ -5,6 +5,9 @@ on:
     types: [opened, synchronize]
     paths:
       - "Contributors.md"
+      - "README.md"
+      - "docs/**"
+      - "translations/**"
 
 jobs:
   check-files:
@@ -36,8 +39,7 @@ jobs:
             const issue_number = context.payload.pull_request.number;
 
             if (invalid.length > 0) {
-              const msg = `
-const message = `Hi @${context.payload.pull_request.user.login}, thanks for your pull request!`;
+              const msg = `Hi @${context.payload.pull_request.user.login}, thanks for your pull request!
 
 However, it looks like your PR includes some files that are *not typically allowed* for beginner contributions:
 
@@ -50,8 +52,8 @@ ${invalid.join("\n")}
 - \`README.md\`
 - Files in \`docs/\` or \`translations/\`
 
-Let us know if you intended these changes. Thanks for contributing! 💜
-              `;
+Let us know if you intended these changes. Thanks for contributing! 💜`;
+
               await github.rest.issues.createComment({
                 issue_number,
                 owner: context.repo.owner,
@@ -59,9 +61,8 @@ Let us know if you intended these changes. Thanks for contributing! 💜
                 body: msg
               });
             } else {
-              const thanks = `
-🎉 Thanks @${context.payload.pull_request.user.login} for following our contribution guidelines! Everything looks good. 👍
-              `;
+              const thanks = `🎉 Thanks @${context.payload.pull_request.user.login} for following our contribution guidelines! Everything looks good. 👍`;
+
               await github.rest.issues.createComment({
                 issue_number,
                 owner: context.repo.owner,
