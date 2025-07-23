@@ -37,7 +37,7 @@ jobs:
 
             if (invalid.length > 0) {
               const msg = `
-👋 Hi @${context.payload.pull_request.user.login}, thanks for your pull request!
+const message = `Hi @${context.payload.pull_request.user.login}, thanks for your pull request!`;
 
 However, it looks like your PR includes some files that are *not typically allowed* for beginner contributions:
 
